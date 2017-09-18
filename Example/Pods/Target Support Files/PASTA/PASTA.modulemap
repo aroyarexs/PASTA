@@ -1,0 +1,6 @@
+framework module PASTA {
+  umbrella header "PASTA-umbrella.h"
+
+  export *
+  module * { export * }
+}
