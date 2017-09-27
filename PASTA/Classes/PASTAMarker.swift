@@ -15,22 +15,22 @@ infix operator ~
  After created by `PASTAView` the object receives touch events and
  notifies `MarkerManager` and `PASTATangible` of changes.
  */
-class PASTAMarker: UIView {
+public class PASTAMarker: UIView {
 
     /// Automatically sets `previousCenter` before setting new `center` value.
-    override var center: CGPoint {
+    public override var center: CGPoint {
         willSet {
             previousCenter = center
             markerSnapshot.center = center
         }
     }
     /// Defines whether mean values for e.g. radius should be calculated and used.
-    var useMeanValues = true
+    public var useMeanValues = true
     /**
      The radius of this marker.
      After did set this property `frame` of view is updated.
      */
-    var radius: CGFloat {
+    public var radius: CGFloat {
         didSet {
             if useMeanValues { self.radius = meanRadius.add(value: radius) }
             self.frame = CGRect(center: center, radius: radius)
@@ -38,19 +38,19 @@ class PASTAMarker: UIView {
         }
     }
     /// A mean calculator for the radius.
-    private let meanRadius = PASTAMeanCalculator()
+    let meanRadius = PASTAMeanCalculator()
     /// Indicates whether this marker is still receives updates or not.
-    var isActive: Bool = false
+    public var isActive: Bool = false
     /// The previous center location of the view.
-    var previousCenter: CGPoint
+    public var previousCenter: CGPoint
 
     /// The Tangible this marker belongs to.
-    weak var tangible: MarkerEvent?
+    public weak var tangible: MarkerEvent?
     /// The marker manager this marker should register with.
-    weak var markerManager: MarkerStatus?
+    public weak var markerManager: MarkerStatus?
 
     /// Describes this marker as a pattern.
-    var markerSnapshot: MarkerSnapshot
+    public internal (set) var markerSnapshot: MarkerSnapshot
 
     // MARK: -
 
@@ -61,7 +61,7 @@ class PASTAMarker: UIView {
         - rhs: Right hand side.
      - returns: `true` if be similar, else `false`.
      */
-    static func ~ (_ lhs: PASTAMarker, _ rhs: PASTAMarker) -> Bool {
+    public static func ~ (_ lhs: PASTAMarker, _ rhs: PASTAMarker) -> Bool {
         return lhs.markerSnapshot.isRadiusSimilar(to: rhs.markerSnapshot)
     }
 
@@ -81,7 +81,7 @@ class PASTAMarker: UIView {
 //        backgroundColor = UIColor.gray  // uncomment to have a visualization of all detected markers
     }
 
-    required convenience init?(coder aDecoder: NSCoder) {
+    public required convenience init?(coder aDecoder: NSCoder) {
         self.init(center: CGPoint.zero)
     }
 
@@ -99,7 +99,7 @@ class PASTAMarker: UIView {
     // MARK: - UIResponder Overrides
 
     /// Calling `update(touch:)` with first touch, updating active state and notifying `tangible` and `markerManager`.
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         update(touch: touch)
 
@@ -109,7 +109,7 @@ class PASTAMarker: UIView {
     }
 
     /// Calling `update(touch:)` with first touch, updating active state and notifying `tangible` and `markerManager`.
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         update(touch: touch)
 
@@ -122,12 +122,12 @@ class PASTAMarker: UIView {
         markerManager?.markerDidBecomeInactive(self)
     }
 
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         touchesEnded(touches, with: event)
     }
 
     /// Calling `update(touch:)` with first touch and `tangible.markerMoved(_:)`.
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         update(touch: touch)
 

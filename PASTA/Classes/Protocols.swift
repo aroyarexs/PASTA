@@ -9,7 +9,7 @@
 import UIKit
 
 /// Used to notify the receiver of any status changes of
-protocol MarkerStatus: AnyObject {
+public protocol MarkerStatus: AnyObject {
 
     /**
      Notifies the receiver that a (new) marker did become active.
@@ -26,7 +26,7 @@ protocol MarkerStatus: AnyObject {
 }
 
 /// Use this protocol to notify the receiver of any marker changes.
-protocol MarkerEvent: MarkerStatus {
+public protocol MarkerEvent: MarkerStatus {
 
     /**
      Notifies the receiver that a marker moved.
@@ -37,7 +37,7 @@ protocol MarkerEvent: MarkerStatus {
     func markerMoved(_ marker: PASTAMarker)
 }
 
-protocol TangibleStatus: AnyObject {
+public protocol TangibleStatus: AnyObject {
 
     /**
      Notifies the receiver that a (new) tangible did become active.
@@ -71,7 +71,7 @@ protocol TangibleStatus: AnyObject {
     func tangible(_ tangible: PASTATangible, recovered marker: PASTAMarker)
 }
 
-protocol TangibleEvent: TangibleStatus {
+public protocol TangibleEvent: TangibleStatus {
 
     /**
      Notifies the receiver that a tangible has moved.
@@ -81,7 +81,7 @@ protocol TangibleEvent: TangibleStatus {
 }
 
 /// Defines standard functions of a tangible manager.
-protocol TangibleManager: MarkerStatus, TangibleStatus {
+public protocol TangibleManager: MarkerStatus, TangibleStatus {
 
     /// Notifies the delegate about all `TangibleEvent` changes.
     /// Set the `eventDelegate` property of `PASTATangible` to this value.

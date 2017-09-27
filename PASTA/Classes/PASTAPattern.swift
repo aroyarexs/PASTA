@@ -10,7 +10,7 @@ import Foundation
 /// Use it to compare two Tangibles.
 /// When checking for similarity/equality measurement inaccuracy is taken into account.
 /// For the exact error values please have a look at Master's Thesis of Aaron Krämer.
-class PASTAPattern {
+public class PASTAPattern {
 
     /// A list of `MarkerSnapshot`\s.
     private (set) var snapshots = [MarkerSnapshot]()
@@ -89,7 +89,7 @@ class PASTAPattern {
      - parameter comparator: Another pattern.
      - returns: `true` if similar, otherwise `false`.
      */
-    func isSimilar(to comparator: PASTAPattern) -> Bool {
+    public func isSimilar(to comparator: PASTAPattern) -> Bool {
         var isSimilar = false
         guard let comparatorFirstMarker = comparator.snapshots.first else { return isSimilar }
         var ownReferences = self.snapshots  // we don't want to override markers, getting copy
@@ -124,7 +124,7 @@ class PASTAPattern {
      - parameter radius: A radius as `CGFloat`.
      - returns: `true` if radii similar, otherwise `false`.
      */
-    func isRadiusSimilar(to radius: CGFloat) -> Bool {
+    public func isRadiusSimilar(to radius: CGFloat) -> Bool {
         return abs(CGVector(from: .zero, to: snapshots[0].center).distance - radius) < 6 // TODO: right value
     }
 
@@ -137,7 +137,7 @@ class PASTAPattern {
         - angleInDegree: The angle to compare with in degree.
      - returns: `true` if angle similar, otherwise `false`.
      */
-    func isAngleSimilar(atMarkerWith uuidString: String, toDegrees: CGFloat) -> Bool {
+    public func isAngleSimilar(atMarkerWith uuidString: String, toDegrees: CGFloat) -> Bool {
         return abs(angle(atMarkerWith: uuidString).radianToDegree - toDegrees) < 9    // TODO: right value
     }
 }
@@ -146,7 +146,7 @@ extension PASTAPattern: Equatable {
     /// Same behaviour as `isSimilar(to:)` function.
     /// - parameters: 
     /// - returns: 
-    static func == (lhs: PASTAPattern, rhs: PASTAPattern) -> Bool {
+    public static func == (lhs: PASTAPattern, rhs: PASTAPattern) -> Bool {
         return lhs.isSimilar(to: rhs)
     }
 }
@@ -154,15 +154,15 @@ extension PASTAPattern: Equatable {
 /**
  Contains a snapshot of a `PASTAMarker` at the time this structure was initialized.
  */
-struct MarkerSnapshot {
+public struct MarkerSnapshot {
     /// The center of the referenced marker.
-    var center: CGPoint
+    public var center: CGPoint
     /// The radius of the referenced marker.
-    var radius: CGFloat
+    public var radius: CGFloat
     /// A UUID making this snapshot unique.
     let uuid: uuid_t
     /// The `uuid` represented as `String`.
-    var uuidString: String {
+    public var uuidString: String {
         return UUID(uuid: uuid).uuidString
     }
 
@@ -178,7 +178,7 @@ struct MarkerSnapshot {
      - parameters comparator: Another `MarkerSnapshot` to compare with.
      - returns: `true if radii are similar, otherwise `false`.
      */
-    func isRadiusSimilar(to comparator: MarkerSnapshot) -> Bool {
+    public func isRadiusSimilar(to comparator: MarkerSnapshot) -> Bool {
         return abs(self.radius - comparator.radius) < 9 // TODO: right value
     }
 }
@@ -189,7 +189,7 @@ extension MarkerSnapshot: Hashable {
         return (center.x.hashValue ^ center.y.hashValue &* 16777619) + Int(radius)
     }
 
-    static func == (lhs: MarkerSnapshot, rhs: MarkerSnapshot) -> Bool {
+    public static func == (lhs: MarkerSnapshot, rhs: MarkerSnapshot) -> Bool {
         return lhs.center == rhs.center && lhs.radius == rhs.radius
     }
 }

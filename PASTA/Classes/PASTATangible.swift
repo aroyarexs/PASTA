@@ -18,54 +18,54 @@ import UIKit
 
  If you need a Tangible which supports less or more than 3 markers you have to create a subclass.
  */
-class PASTATangible: PASTAMarker {
+public class PASTATangible: PASTAMarker {
 
-    override var useMeanValues: Bool {
+    public override var useMeanValues: Bool {
         didSet { markers.forEach { $0.useMeanValues = useMeanValues } }
     }
     /// Vector from center to marker 0. Used as initial orientation
-    private let initialCenterToMarker0Vector: CGVector
+    let initialCenterToMarker0Vector: CGVector
     /// The orientation as a vector since this Tangible was detected.
-    var initialOrientationVector: CGVector {
+    public var initialOrientationVector: CGVector {
         let centerToMarkerVector = CGVector(from: center, to: markers[0].center)
         let angle = initialCenterToMarker0Vector.angleRadians(between: centerToMarkerVector).radianToDegree
         return CGVector.normalizedUp.rotate(degrees: angle)
     }
     /// The orientation of this Tangible based on the pattern as a normalized vector.
     /// `nil` if pattern has no uniquely identifiable marker.
-    var orientationVector: CGVector? {
+    public var orientationVector: CGVector? {
         guard let marker = markerWithAngleSimilarToNone() else { return nil }
         return CGVector(from: center, to: marker.center).normalized
     }
 
     /// Internal array of marker. Mutable.
-    private var internalMarkers: [PASTAMarker]
+    var internalMarkers: [PASTAMarker]
     /// Array of `PASTAMarker`. get-only.
-    var markers: [PASTAMarker] {
+    public var markers: [PASTAMarker] {
         return internalMarkers
     }
     /// Returns an array containing all inactive markers.
-    var inactiveMarkers: [PASTAMarker] {
+    public var inactiveMarkers: [PASTAMarker] {
         return markers.filter({ !$0.isActive })
     }
     /// The tangible manager who created this Tangible.
-    weak var tangibleManager: TangibleManager?
+    public weak var tangibleManager: TangibleManager?
     /// Set this to get event updates of this Tangible.
-    weak var eventDelegate: TangibleEvent?
+    public weak var eventDelegate: TangibleEvent?
 
     /// Dictionary containing mean calculator instances for each marker's angle.
-    private var meanAngles = [PASTAMarker: PASTAMeanCalculator]()   // FIXME: Currently unused
+    var meanAngles = [PASTAMarker: PASTAMeanCalculator]()   // FIXME: Currently unused
 
     /// Describes the pattern of this Tangible.
-    fileprivate (set) var pattern: PASTAPattern
+    public internal (set) var pattern: PASTAPattern
     /// The identifier of the similar pattern which is used in the `patternWhitelist` of `PASTAManager`.
-    var patternIdentifier: String? {
+    public var patternIdentifier: String? {
         return (tangibleManager?.patternWhitelist.first { pattern.isSimilar(to: $0.value) })?.key
     }
 
     // MARK: - Functions
 
-    required init?(markers: [PASTAMarker]) {
+    public required init?(markers: [PASTAMarker]) {
         guard markers.count == 3 else { return nil }
 
         internalMarkers = markers
@@ -94,7 +94,7 @@ class PASTATangible: PASTAMarker {
      Always returns `nil`.
      Use `init?(markers:)` instead.
      */
-    required convenience init?(coder aDecoder: NSCoder) {
+    public required convenience init?(coder aDecoder: NSCoder) {
         self.init(markers: [])
     }
 
@@ -154,7 +154,7 @@ class PASTATangible: PASTAMarker {
 
     /// Searches for the marker which angle is distinguishable from the other two.
     /// - returns: A marker or `nil`.
-    private func markerWithAngleSimilarToNone() -> PASTAMarker? {
+    func markerWithAngleSimilarToNone() -> PASTAMarker? {
         for marker in internalMarkers {
             let angle = pattern.angle(atMarkerWith: marker.markerSnapshot.uuidString).radianToDegree
             var notSimilar = true
@@ -179,7 +179,7 @@ class PASTATangible: PASTAMarker {
         - right: Right hand side.
      - returns: `true` be similar, else `false`.
      */
-    static func ~ (_ left: PASTATangible, _ right: PASTATangible) -> Bool {
+    public static func ~ (_ left: PASTATangible, _ right: PASTATangible) -> Bool {
         return left.pattern.isSimilar(to: right.pattern)
     }
 
@@ -193,7 +193,7 @@ class PASTATangible: PASTAMarker {
         - event: Optional.
      - returns: A marker or `nil`.
      */
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         guard self.point(inside: point, with: event) else { return nil }
         let marker = inactiveMarkers.first { $0.hitTest(point, with: event) != nil }
         return marker ?? event == nil ? self : nil
@@ -208,7 +208,7 @@ class PASTATangible: PASTAMarker {
 
 extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
 
-    func markerMoved(_ marker: PASTAMarker) {
+    public func markerMoved(_ marker: PASTAMarker) {
         // updating inactive markers
         if inactiveMarkers.count == 2 {
             let translate = marker.center - marker.previousCenter
@@ -251,7 +251,7 @@ extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
         }
     }
 
-    func markerDidBecomeActive(_ marker: PASTAMarker) {
+    public func markerDidBecomeActive(_ marker: PASTAMarker) {
         markerMoved(marker)
         if isActive == false && markers.count != inactiveMarkers.count {    // was inactive and now one active marker
             isActive = true
@@ -267,7 +267,7 @@ extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
         eventDelegate?.tangible(self, recovered: marker)
     }
 
-    func markerDidBecomeInactive(_ marker: PASTAMarker) {
+    public func markerDidBecomeInactive(_ marker: PASTAMarker) {
         if inactiveMarkers.count == 1 {
             pattern = PASTAPattern(marker1: markers[0], marker2: markers[1], marker3: markers[2])
         }

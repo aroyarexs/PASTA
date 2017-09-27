@@ -20,19 +20,19 @@ import UIKit
  Don't forget to set `tangibleDelegate` of your new `TangibleManager`.
  Otherwise you won't receive Tangible events.
  */
-class PASTAView: UIView {
+public class PASTAView: UIView {
 
-    weak var delegate: TangibleEvent? {
+    public weak var delegate: TangibleEvent? {
         didSet {
             manager.tangibleDelegate = delegate
         }
     }
     /// The manager used by this view.
-    var manager: TangibleManager = PASTAManager()
+    public var manager: TangibleManager = PASTAManager()
 
     // hitTest() gets called 2 times
     // http://stackoverflow.com/questions/4304113/uiviews-hittestwithevent-called-three-times#4536765
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         guard self.point(inside: point, with: event) else { return nil }
         if let resultView = super.hitTest(point, with: event), resultView != self {
             return resultView
