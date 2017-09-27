@@ -36,6 +36,15 @@
 		50B80F12A9BAE302F07F6CF94752F462 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4F2CA1ACAB7C5DC246E5970464CA7 /* mach_excServer.c */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		551440A0F92574039C1D2EB39227D6B8 /* AsyncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3735170CDCA6A1C7E7D0E1876ED22B /* AsyncMatcherWrapper.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		56C03770546168213C55304A1E4BCFC0 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9DD9D6490CDC782AB0EBFF62EC7AEE /* Configuration.swift */; };
+		584B9079BA75CF4B47126CE6 /* PASTAHeap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B94ACFC6759228106C757 /* PASTAHeap.swift */; };
+		584B90E1D8B02C4AE3DEA4A3 /* PASTAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B9385326C126A388F6BFF /* PASTAManager.swift */; };
+		584B91547FC57DDC0BED9698 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B93AE7BF2F9F30454D4A3 /* Protocols.swift */; };
+		584B932B6E3099450D885EC2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B9133E70F1DBFE1953EF3 /* Extensions.swift */; };
+		584B94D70A205A302AC102CB /* PASTAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B9F787AFD8E12E46A5FF2 /* PASTAView.swift */; };
+		584B9539B55FCD48EA93CE44 /* PASTAMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B940457BAA0284326F5A5 /* PASTAMarker.swift */; };
+		584B9962E52CCDB7015D8E8D /* PASTATangible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B96BAEAF14F6B3294540B /* PASTATangible.swift */; };
+		584B9ABE48261FB8866D2F43 /* PASTAMeanCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B9B99C90AAB3895694BBB /* PASTAMeanCalculator.swift */; };
+		584B9CECA9DBA99F0A1ADCF4 /* PASTAPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B9DA67B988F2954205715 /* PASTAPattern.swift */; };
 		597B6040983AE6B12B58B5EDE93B43B5 /* ExampleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEA58BA3A98ABA9AF85ACD8AE3CED36 /* ExampleGroup.swift */; };
 		599669823A2EED2928C77F301F6B0515 /* BeNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B2E4FE5801A893DA4774DEC2C3985 /* BeNil.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		5F2A7273439EA76C289FF5EDC7C9F686 /* Callsite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566EED392600B84A615AC7615D23F5CB /* Callsite.swift */; };
@@ -191,6 +200,15 @@
 		5058B4852C449730EE28E5F2CD349B24 /* EndWith.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EndWith.swift; path = Sources/Nimble/Matchers/EndWith.swift; sourceTree = "<group>"; };
 		525B5EB32452EE8123EA3E65FDC81622 /* PostNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PostNotification.swift; path = Sources/Nimble/Matchers/PostNotification.swift; sourceTree = "<group>"; };
 		566EED392600B84A615AC7615D23F5CB /* Callsite.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Callsite.swift; path = Sources/Quick/Callsite.swift; sourceTree = "<group>"; };
+		584B9133E70F1DBFE1953EF3 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = PASTA/Classes/Extensions.swift; sourceTree = "<group>"; };
+		584B9385326C126A388F6BFF /* PASTAManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PASTAManager.swift; path = PASTA/Classes/PASTAManager.swift; sourceTree = "<group>"; };
+		584B93AE7BF2F9F30454D4A3 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Protocols.swift; path = PASTA/Classes/Protocols.swift; sourceTree = "<group>"; };
+		584B940457BAA0284326F5A5 /* PASTAMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PASTAMarker.swift; path = PASTA/Classes/PASTAMarker.swift; sourceTree = "<group>"; };
+		584B94ACFC6759228106C757 /* PASTAHeap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PASTAHeap.swift; path = PASTA/Classes/PASTAHeap.swift; sourceTree = "<group>"; };
+		584B96BAEAF14F6B3294540B /* PASTATangible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PASTATangible.swift; path = PASTA/Classes/PASTATangible.swift; sourceTree = "<group>"; };
+		584B9B99C90AAB3895694BBB /* PASTAMeanCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PASTAMeanCalculator.swift; path = PASTA/Classes/PASTAMeanCalculator.swift; sourceTree = "<group>"; };
+		584B9DA67B988F2954205715 /* PASTAPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PASTAPattern.swift; path = PASTA/Classes/PASTAPattern.swift; sourceTree = "<group>"; };
+		584B9F787AFD8E12E46A5FF2 /* PASTAView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PASTAView.swift; path = PASTA/Classes/PASTAView.swift; sourceTree = "<group>"; };
 		593D31D88FEB9F2A714940DC346E2DE5 /* Quick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Quick.framework; path = Quick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A4E497DD63B34CAF4112164C7D5C267 /* CwlCatchBadInstruction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CwlCatchBadInstruction.swift; path = Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstruction.swift; sourceTree = "<group>"; };
 		5AC2EAD622CBF58EAD71675C54310955 /* Expression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expression.swift; path = Sources/Nimble/Expression.swift; sourceTree = "<group>"; };
@@ -573,6 +591,15 @@
 			children = (
 				4C3C955F10C37240C2527BE396D03400 /* ReplaceMe.swift */,
 				4BA09D3C00E86A399299EFF218079185 /* Support Files */,
+				584B9133E70F1DBFE1953EF3 /* Extensions.swift */,
+				584B94ACFC6759228106C757 /* PASTAHeap.swift */,
+				584B9385326C126A388F6BFF /* PASTAManager.swift */,
+				584B940457BAA0284326F5A5 /* PASTAMarker.swift */,
+				584B9B99C90AAB3895694BBB /* PASTAMeanCalculator.swift */,
+				584B9DA67B988F2954205715 /* PASTAPattern.swift */,
+				584B96BAEAF14F6B3294540B /* PASTATangible.swift */,
+				584B9F787AFD8E12E46A5FF2 /* PASTAView.swift */,
+				584B93AE7BF2F9F30454D4A3 /* Protocols.swift */,
 			);
 			name = PASTA;
 			path = ../..;
@@ -881,6 +908,15 @@
 			files = (
 				972078BEE0E3390CA2EC4DD040629DB0 /* PASTA-dummy.m in Sources */,
 				006854A6C2072108AD3D25D26B989863 /* ReplaceMe.swift in Sources */,
+				584B932B6E3099450D885EC2 /* Extensions.swift in Sources */,
+				584B9079BA75CF4B47126CE6 /* PASTAHeap.swift in Sources */,
+				584B90E1D8B02C4AE3DEA4A3 /* PASTAManager.swift in Sources */,
+				584B9539B55FCD48EA93CE44 /* PASTAMarker.swift in Sources */,
+				584B9ABE48261FB8866D2F43 /* PASTAMeanCalculator.swift in Sources */,
+				584B9CECA9DBA99F0A1ADCF4 /* PASTAPattern.swift in Sources */,
+				584B9962E52CCDB7015D8E8D /* PASTATangible.swift in Sources */,
+				584B94D70A205A302AC102CB /* PASTAView.swift in Sources */,
+				584B91547FC57DDC0BED9698 /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
