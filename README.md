@@ -1,7 +1,7 @@
 # PASTA
 A Swift SDK to detect passive Tangibles on capacitive screens.
 
-[![CI Status](http://img.shields.io/travis/Aaron Krämer/PASTA.svg?style=flat)](https://travis-ci.org/Aaron Krämer/PASTA)
+<!--[![CI Status](http://img.shields.io/travis/Aaron Krämer/PASTA.svg?style=flat)](https://travis-ci.org/Aaron Krämer/PASTA)-->
 [![Version](https://img.shields.io/cocoapods/v/PASTA.svg?style=flat)](http://cocoapods.org/pods/PASTA)
 [![License](https://img.shields.io/cocoapods/l/PASTA.svg?style=flat)](http://cocoapods.org/pods/PASTA)
 [![Platform](https://img.shields.io/cocoapods/p/PASTA.svg?style=flat)](http://cocoapods.org/pods/PASTA)
@@ -21,9 +21,21 @@ it, simply add the following line to your Podfile:
 pod 'PASTA'
 ```
 
+## How To Use
+
+To use PASTA in your project:
+1. ``import PASTA``
+2. Add an instance of ``PASTAView`` as a subview or set it as type of a view in Interface Builder.
+3. Implement ``TangibleEvent`` and assign the object to ``tangibleDelegate`` property of ``PASTAView``.
+4. Provide some patterns by calling ``whitelist(pattern:identifier:)``
+
+	4.1. Create ``PASTAPattern`` with ``MarkerSnapshot`` from scratch, or
+
+	4.2. disable whitelist by setting ``patternWhitelistDisabled`` to ``true``, place your desired Tangibles on the screen, whitelist the patterns, and enable whitelist again.
+
 ## Author
 
-Aaron Krämer, aaron@cs.rwth-aachen.de
+Aaron Krämer
 
 ## License
 
