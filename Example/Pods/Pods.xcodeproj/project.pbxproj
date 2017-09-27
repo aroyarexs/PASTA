@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		006854A6C2072108AD3D25D26B989863 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C955F10C37240C2527BE396D03400 /* ReplaceMe.swift */; };
 		047A68C646E00EB6D7D4D7343B801D09 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DC9FAE16E2DD68869AF1B29FA0A42A /* AdapterProtocols.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		07722FBCF6B380961B9D2832D5883F45 /* BeGreaterThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEE1F436B68692319DE23FF7A16197E /* BeGreaterThan.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		0AEC20AACF9B10846830274E3B2AA6FD /* BeLogical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226C1AC4144C4405F39189731DF06CEC /* BeLogical.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -191,7 +190,6 @@
 		473162EAADE47F759500100475A4A4BE /* Quick.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Quick.xcconfig; sourceTree = "<group>"; };
 		49E788C149CFB1C6C5ABAEC8ECD93817 /* Pods-PASTA_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PASTA_Example-umbrella.h"; sourceTree = "<group>"; };
 		4B7E39158C032742F5DB8A1F5F944A38 /* Quick-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Quick-prefix.pch"; sourceTree = "<group>"; };
-		4C3C955F10C37240C2527BE396D03400 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReplaceMe.swift; path = PASTA/Classes/ReplaceMe.swift; sourceTree = "<group>"; };
 		4C6329DD1EE75A68AA931A2192C28C69 /* CwlCatchException.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CwlCatchException.swift; path = Sources/Lib/CwlPreconditionTesting/CwlCatchException/CwlCatchException/CwlCatchException.swift; sourceTree = "<group>"; };
 		4CEE6D090220683EB93ACD11A04038DD /* CwlCatchBadInstruction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CwlCatchBadInstruction.m; path = Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstruction.m; sourceTree = "<group>"; };
 		4EE1F2D1C9D5935F6B6B5CC49C89E323 /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Sources/Nimble/Utils/Errors.swift; sourceTree = "<group>"; };
@@ -589,7 +587,6 @@
 		C9A7547546F0F86D37E4A7D119E8588E /* PASTA */ = {
 			isa = PBXGroup;
 			children = (
-				4C3C955F10C37240C2527BE396D03400 /* ReplaceMe.swift */,
 				4BA09D3C00E86A399299EFF218079185 /* Support Files */,
 				584B9133E70F1DBFE1953EF3 /* Extensions.swift */,
 				584B94ACFC6759228106C757 /* PASTAHeap.swift */,
@@ -907,7 +904,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				972078BEE0E3390CA2EC4DD040629DB0 /* PASTA-dummy.m in Sources */,
-				006854A6C2072108AD3D25D26B989863 /* ReplaceMe.swift in Sources */,
 				584B932B6E3099450D885EC2 /* Extensions.swift in Sources */,
 				584B9079BA75CF4B47126CE6 /* PASTAHeap.swift in Sources */,
 				584B90E1D8B02C4AE3DEA4A3 /* PASTAManager.swift in Sources */,
