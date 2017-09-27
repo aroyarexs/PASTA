@@ -41,10 +41,10 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		A5B17B110525C8EA20CA5C4D /* Pods-PASTA_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PASTA_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PASTA_Tests/Pods-PASTA_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		A9E3A5C3B22F3F6AD967FE26 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		C11748B93440009E49015BF3 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		A9E3A5C3B22F3F6AD967FE26 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		C11748B93440009E49015BF3 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		C81DEC2ADD3D850499BB82D0 /* Pods-PASTA_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PASTA_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PASTA_Tests/Pods-PASTA_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		DB63E65DF147B718257AC040 /* PASTA.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = PASTA.podspec; path = ../PASTA.podspec; sourceTree = "<group>"; };
+		DB63E65DF147B718257AC040 /* PASTA.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PASTA.podspec; path = ../PASTA.podspec; sourceTree = "<group>"; };
 		F36A90DA2398E5E3F63A99A4 /* Pods-PASTA_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PASTA_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-PASTA_Example/Pods-PASTA_Example.release.xcconfig"; sourceTree = "<group>"; };
 		FDAE773324D05E21B18C7B1E /* Pods-PASTA_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PASTA_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PASTA_Example/Pods-PASTA_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
