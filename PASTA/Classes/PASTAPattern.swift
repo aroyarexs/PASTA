@@ -16,23 +16,34 @@ public class PASTAPattern {
     private (set) var snapshots = [MarkerSnapshot]()
 
     /**
-     Creates a new ambiguous pattern with 3 markers.
-     The pattern is translated such that the circumcenter is at (0,0).
-     The order of the marker may change due to easier internal calculations.
+     Creates a new pattern with 3 markers.
+     Calls `init(snap1:snap2:snap3:)` to initialize a new pattern.
      - parameters:
         - marker1: A `PASTAMarker`.
         - marker2: A `PASTAMarker`.
         - marker3: A `PASTAMarker`.
      - returns: A new Tangible pattern.
      */
-    init(marker1: PASTAMarker, marker2: PASTAMarker, marker3: PASTAMarker) {
-        let circumcenter = CGPoint.circumcenter(first: marker1.center, second: marker2.center, third: marker3.center)
+    convenience init(marker1: PASTAMarker, marker2: PASTAMarker, marker3: PASTAMarker) {
+        self.init(snap1: marker1.markerSnapshot, snap2: marker2.markerSnapshot, snap3: marker3.markerSnapshot)
+    }
 
-        let markers = [marker1, marker2, marker3]
+    /// Creates a new pattern with 3 markers.
+    /// The pattern is translated such that the circumcenter is at (0,0).
+    /// The order of the marker may change due to easier internal calculations.
+    /// - parameters:
+    ///    - marker1: A `MarkerSnapshot`.
+    ///    - marker2: A `MarkerSnapshot`.
+    ///    - marker3: A `MarkerSnapshot`.
+    /// - returns: A new Tangible pattern.
+    init(snap1: MarkerSnapshot, snap2: MarkerSnapshot, snap3: MarkerSnapshot) {
+        let circumcenter = CGPoint.circumcenter(first: snap1.center, second: snap2.center, third: snap3.center)
+
+        let markers = [snap1, snap2, snap3]
         markers.forEach {
             // translating tangible to (0,0) for easier comparison with other
             let markerRef = MarkerSnapshot(center: $0.center - circumcenter, radius: $0.radius,
-                    uuid: $0.markerSnapshot.uuid)
+                    uuid: $0.uuid)
             snapshots.append(markerRef)
         }
 
@@ -40,8 +51,6 @@ public class PASTAPattern {
         let v2 = CGVector(from: markers[1].center, to: markers[2].center)
         if v1.angleRadians(between: v2) < 0 { snapshots.reverse() }   // ensures correct angle calculation
     }
-
-    // TODO: new init with MarkerSnapshots
 
     /**
      Creates a vector pointing from `from` to `to`.
