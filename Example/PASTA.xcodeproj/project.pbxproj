@@ -311,10 +311,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PASTA_Example/Pods-PASTA_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Metron/Metron.framework",
 				"${BUILT_PRODUCTS_DIR}/PASTA/PASTA.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Metron.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PASTA.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,6 +1,8 @@
 PODS:
+  - Metron (1.0.0)
   - Nimble (5.1.1)
-  - PASTA (0.1.0)
+  - PASTA (0.1.0):
+    - Metron (~> 1.0)
   - Quick (1.0.0)
 
 DEPENDENCIES:
@@ -13,8 +15,9 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
+  Metron: f3ad4f8d5d267fe4e644d81cacb1c5e556b88851
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
-  PASTA: 9892ff77275288dd02be45871608bfc9a72e979f
+  PASTA: 09c592c682be2f3cb2b170918c0b3a711a6a8e63
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
 
 PODFILE CHECKSUM: c1aadad1787eb2cb7e02f098f3b4b53c71a651a5
