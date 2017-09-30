@@ -1,14 +1,17 @@
 PODS:
   - Metron (1.0.0)
-  - Nimble (5.1.1)
+  - Nimble (6.1.0)
   - PASTA (0.1.0):
     - Metron (~> 1.0)
-  - Quick (1.0.0)
+  - PASTA/Tests (0.1.0):
+    - Metron (~> 1.0)
+    - Nimble (~> 6.1)
+    - Quick (~> 1.1.0)
+  - Quick (1.1.0)
 
 DEPENDENCIES:
-  - Nimble (~> 5.1.1)
   - PASTA (from `../`)
-  - Quick (~> 1.0.0)
+  - PASTA/Tests (from `../`)
 
 EXTERNAL SOURCES:
   PASTA:
@@ -16,10 +19,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Metron: f3ad4f8d5d267fe4e644d81cacb1c5e556b88851
-  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
-  PASTA: 09c592c682be2f3cb2b170918c0b3a711a6a8e63
-  Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
+  Nimble: c53e6903fee94041b90ded74f135820437d8bf59
+  PASTA: c6c112b12d8c8f59da59be4a635b0e35e8a64837
+  Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
 
-PODFILE CHECKSUM: c1aadad1787eb2cb7e02f098f3b4b53c71a651a5
+PODFILE CHECKSUM: aaf4a11885f81f0e4c91baa4efc66dc2e62fc6eb
 
 COCOAPODS: 1.3.1

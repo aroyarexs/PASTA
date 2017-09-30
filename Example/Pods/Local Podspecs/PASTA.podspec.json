@@ -24,5 +24,20 @@
     "Metron": [
       "~> 1.0"
     ]
-  }
+  },
+  "testspecs": [
+    {
+      "name": "Tests",
+      "test_type": "unit",
+      "source_files": "Tests/*",
+      "dependencies": {
+        "Quick": [
+          "~> 1.1.0"
+        ],
+        "Nimble": [
+          "~> 6.1"
+        ]
+      }
+    }
+  ]
 }
