@@ -68,29 +68,6 @@ extension CGVector {
         let p = CGPoint(x: dx, y: dy).rotate(around: CGPoint.zero, degrees: degrees)
         return CGVector(dx: p.x, dy: p.y)
     }
-
-    /**
-     Adds `rhs` to `lhs`.
-     - parameters:
-        - first: A vector.
-        - second: A vector.
-     - returns: A new vector representing the transition.
-     */
-    static func + (_ lhs: CGVector, _ rhs: CGVector) -> CGVector {  // TODO: unit test
-        return CGVector(dx: lhs.dx + rhs.dx, dy: lhs.dy + rhs.dy)
-    }
-
-    /**
-     Changes the length/distance of a vector by multiplying it with a scalar.
-     `dx` and `dy` are multiplied by `factor`.
-     - parameters:
-        - v: The vector.
-        - scalar: A scalar.
-     - returns: A new vector with changed distance.
-     */
-    static func * (_ v: CGVector, _ scalar: CGFloat) -> CGVector {   // TODO: unit test
-        return CGVector(dx: v.dx * scalar, dy: v.dy * scalar)
-    }
 }
 
 extension CGPoint {
@@ -159,19 +136,6 @@ extension CGPoint {
     }
 
     /**
-     Subtracts `rhs` from `lhs`.
-     - parameters:
-        - first: A point.
-        - second: A point.
-     - returns: A new point representing the transition.
-     */
-    static func - (_ lhs: CGPoint, _ rhs: CGPoint) -> CGPoint {
-        let x = lhs.x - rhs.x
-        let y = lhs.y - rhs.y
-        return CGPoint(x: x, y: y)
-    }
-
-    /**
      Adds `rhs` to `lhs`.
      - parameters:
         - first: A point.
@@ -204,17 +168,6 @@ extension CGPoint {
      */
     static func - (_ lhs: CGPoint, _ rhs: CGFloat) -> CGPoint {
         return lhs + (-rhs)
-    }
-
-    /**
-     Adds `rhs` to `lhs`.
-     Values of `lhs` will be replaced with the new ones.
-     - parameters:
-        - first: A point.
-        - second: A point.
-     */
-    static func += (_ lhs: inout CGPoint, _ rhs: CGPoint) {
-        lhs = lhs + rhs
     }
 
     /**

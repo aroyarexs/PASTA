@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Metron
 
 /**
  This class represents a Tangible of exact 3 markers.
@@ -212,7 +213,7 @@ extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
         // updating inactive markers
         if inactiveMarkers.count == 2 {
             let translate = marker.center - marker.previousCenter
-            inactiveMarkers.forEach { $0.center += translate }
+            inactiveMarkers.forEach { $0.center = $0.center + translate }
             center = CGPoint.circumcenter(first: markers[0].center, second: markers[1].center, third: markers[2].center)
         } else if inactiveMarkers.count == 1, let inactiveMarker = inactiveMarkers.first,
                   let theOtherActiveMarker = (markers.first { $0 != inactiveMarker && $0 != marker }) {
