@@ -50,17 +50,6 @@ extension CGVector {
         }
         return absolute ? Angle(abs(radian)) : Angle(radian)
     }
-
-    /**
-     Returns a new vector rotated by `degrees`.
-     Rotation is clockwise since coordinate system of iOS is mirrored on x-axis.
-     - parameter degrees: The angle the vector should be rotated.
-     - returns: A new vector rotated by `degrees`.
-     */
-    func rotate(degrees: CGFloat) -> CGVector {
-        let p = CGPoint(x: dx, y: dy).rotate(around: CGPoint.zero, degrees: degrees)
-        return CGVector(dx: p.x, dy: p.y)
-    }
 }
 
 extension CGPoint {
@@ -140,24 +129,6 @@ extension CGPoint {
      */
     static func - (_ lhs: CGPoint, _ rhs: CGFloat) -> CGPoint {
         return lhs + (-rhs)
-    }
-
-    /**
-    Rotates this point around `origin` by `degrees` clockwise.
-    Clockwise because iOS coordinate system is inverted at x-axis.
-     ## Reference
-     [StackOverflow](https://stackoverflow.com/questions/35683376/rotating-a-cgpoint-around-another-cgpoint#35683523)
-     - parameters:
-        - origin: Origin of the rotation.
-        - degrees: Rotation in degrees.
-     - returns: The new position after rotation.
-     */
-    func rotate(around origin: CGPoint, degrees: CGFloat) -> CGPoint {
-        let vector = CGVector(from: origin, to: self)
-        let azimuth = CoreGraphics.atan2(vector.dy, vector.dx) // in radians
-        let newAzimuth = azimuth + degrees * CGFloat.pi / 180.0 // convert it to radians
-        let radius = vector.magnitude
-        return origin + CGPoint(x: radius * cos(newAzimuth), y: radius * sin(newAzimuth))
     }
 
     /**

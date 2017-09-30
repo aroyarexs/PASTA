@@ -30,7 +30,7 @@ public class PASTATangible: PASTAMarker {
     public var initialOrientationVector: CGVector {
         let centerToMarkerVector = CGVector(from: center, to: markers[0].center)
         let angle = initialCenterToMarker0Vector.angle(between: centerToMarkerVector)
-        return CGVector.normalizedUp.rotate(degrees: angle.degrees)
+        return CGVector.normalizedUp.applying(.init(rotationAngle: angle))
     }
     /// The orientation of this Tangible based on the pattern as a normalized vector.
     /// `nil` if pattern has no uniquely identifiable marker.
@@ -228,7 +228,7 @@ extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
             let angle = originalActiveVector.angle(between: currentActiveVector)
 
             guard let originalInactiveVector = pattern.vector(from: marker, to: inactiveMarker) else { return }
-            let originalInactiveVectorRotated = originalInactiveVector.rotate(degrees: angle.degrees)
+            let originalInactiveVectorRotated = originalInactiveVector.applying(.init(rotationAngle: angle))
 
             let markerVector = CGVector(from: .zero, to: marker.center)
             let tempInactiveCenter = (markerVector + originalInactiveVectorRotated).point
