@@ -237,7 +237,7 @@ extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
             // V = (Point - Center)
             let centerToTempInactive = CGVector(from: center, to: tempInactiveCenter)
             // Answer = Center + V / |V| * Radius
-            inactiveMarker.center = center + (centerToTempInactive.normalized * radius).point
+            inactiveMarker.center = center + (centerToTempInactive.normalized * radius)
         } else {
             center = Triangle(a: markers[0].center, b: markers[1].center, c: markers[2].center).cicrumcenter
         }

@@ -97,19 +97,6 @@ extension CGPoint {
     }
 
     /**
-     Adds `rhs` to `lhs`.
-     - parameters:
-        - first: A point.
-        - second: A point.
-     - returns: A new point representing the transition.
-     */
-    static func + (_ lhs: CGPoint, _ rhs: CGPoint) -> CGPoint {
-        let x = lhs.x + rhs.x
-        let y = lhs.y + rhs.y
-        return CGPoint(x: x, y: y)
-    }
-
-    /**
      Adds `rhs` to x and y coordinate of `lhs`.
      - parameters:
         - first: A point.
