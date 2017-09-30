@@ -76,7 +76,7 @@ public class PASTATangible: PASTAMarker {
                 first: markers[0].center,
                 second: markers[1].center,
                 third: markers[2].center)
-        let radius = CGVector(from: circumcenter, to: markers[0].center).distance
+        let radius = CGVector(from: circumcenter, to: markers[0].center).magnitude
         initialCenterToMarker0Vector = CGVector(from: circumcenter, to: markers[0].center)
         // TODO: decide if tangible can be formed (min, max radius?)
         super.init(center: circumcenter, radius: radius)
@@ -119,7 +119,7 @@ public class PASTATangible: PASTAMarker {
                           $0.uuidString == inactiveMarker.markerSnapshot.uuidString
                       })
                         else { return }
-                let offset = abs(activeToNew.distance - activeToInactiveInPattern.distance)
+                let offset = abs(activeToNew.magnitude - activeToInactiveInPattern.magnitude)
                 // new marker has to lay inside radius of inactive marker
                 if offset < offsetToBeat && offset <= inactiveInPattern.radius {  // checking offset
                     replaceableMarker = inactiveMarker
@@ -244,7 +244,7 @@ extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
         } else {
             center = CGPoint.circumcenter(first: markers[0].center, second: markers[1].center, third: markers[2].center)
         }
-        radius = CGVector(from: center, to: marker.center).distance
+        radius = CGVector(from: center, to: marker.center).magnitude
 
         if center != previousCenter {
             eventDelegate?.tangibleMoved(self)

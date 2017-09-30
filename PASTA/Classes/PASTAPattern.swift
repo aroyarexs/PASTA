@@ -5,6 +5,7 @@
 
 import CoreGraphics
 import Foundation
+import Metron
 
 /// Describes the pattern of a Tangible.
 /// Use it to compare two Tangibles.
@@ -105,7 +106,7 @@ public class PASTAPattern {
 
         // comparing radii
         let v1 = CGVector(from: .zero, to: comparatorFirstMarker.center)
-        isSimilar = isRadiusSimilar(to: v1.distance)
+        isSimilar = isRadiusSimilar(to: v1.magnitude)
         guard isSimilar else { return false }
 
         for _ in ownReferences.makeIterator() {
@@ -134,7 +135,7 @@ public class PASTAPattern {
      - returns: `true` if radii similar, otherwise `false`.
      */
     public func isRadiusSimilar(to radius: CGFloat) -> Bool {
-        return abs(CGVector(from: .zero, to: snapshots[0].center).distance - radius) < 6 // TODO: right value
+        return abs(CGVector(from: .zero, to: snapshots[0].center).magnitude - radius) < 6 // TODO: right value
     }
 
     /**

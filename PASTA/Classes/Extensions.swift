@@ -4,6 +4,7 @@
 //
 
 import CoreGraphics
+import Metron
 
 extension CGVector {
 
@@ -22,13 +23,9 @@ extension CGVector {
         self.init(dx: to.x - from.x, dy: to.y - from.y)
     }
 
-    /// Calculates the 2-norm of this vector.
-    var distance: CGFloat {
-        return hypot(dx, dy)
-    }
     /// The receiver as normalized vector. `dx` and `dy` divided by `distance`.
     var normalized: CGVector {
-        let length = self.distance
+        let length = magnitude
         return CGVector(dx: dx/length, dy: dy/length)
     }
     /**
@@ -44,7 +41,7 @@ extension CGVector {
      - returns: The angle in radians between -π and π (0 to π, if `absolute` is `true`).
      */
     func angleRadians(between vector: CGVector, absolute: Bool = false) -> CGFloat {   // TODO: put radians in name
-        var radian = atan2(vector.dy, vector.dx) - atan2(dy, dx)
+        var radian = CoreGraphics.atan2(vector.dy, vector.dx) - CoreGraphics.atan2(dy, dx)
 
         if radian > CGFloat.pi {
             radian -= CGFloat.pi * 2
@@ -104,7 +101,7 @@ extension CGPoint {
      */
     static func circleCenters(point1: CGPoint, point2: CGPoint, radius: CGFloat) -> (CGPoint, CGPoint) {
         /// distance between points 1 and 2
-        let q = CGVector(from: point1, to: point2).distance
+        let q = CGVector(from: point1, to: point2).magnitude
         guard q != 0 else { return (point1, point1) }
 
         /// halfway between points 1 and 2
@@ -178,9 +175,9 @@ extension CGPoint {
      */
     func rotate(around origin: CGPoint, degrees: CGFloat) -> CGPoint {
         let vector = CGVector(from: origin, to: self)
-        let azimuth = atan2(vector.dy, vector.dx) // in radians
+        let azimuth = CoreGraphics.atan2(vector.dy, vector.dx) // in radians
         let newAzimuth = azimuth + degrees * CGFloat.pi / 180.0 // convert it to radians
-        let radius = vector.distance
+        let radius = vector.magnitude
         return origin + CGPoint(x: radius * cos(newAzimuth), y: radius * sin(newAzimuth))
     }
 
@@ -195,7 +192,7 @@ extension CGPoint {
     func closest(point1: CGPoint, point2: CGPoint) -> CGPoint {
         let v1 = CGVector(from: self, to: point1)
         let v2 = CGVector(from: self, to: point2)
-        return v1.distance <= v2.distance ? point1 : point2
+        return v1.magnitude <= v2.magnitude ? point1 : point2
     }
 }
 
