@@ -175,37 +175,10 @@ extension CGPoint {
     }
 }
 
-extension CGSize {
-
-    /**
-     Instantiates a new CGSize object with width/height set to `radius * 2`.
-     - parameters:
-        - radius: Half width/height of CGSize.
-     - returns: CGSize with width/height set to `radius * 2`.
-     */
-    init(radius: CGFloat) {
-        self.init(width: radius * 2, height: radius * 2)
-    }
-}
-
 extension CGFloat {
 
     /// Converts value to degree.
     var radianToDegree: CGFloat {
         return self * 180.0 / CGFloat.pi
-    }
-}
-
-extension CGRect {
-
-    /**
-     Creates a square with origin set to `center - radius` and width/height set to `radius * 2`.
-     - parameters:
-        - center: The center of the rect.
-        - radius: The width and height.
-     */
-    init(center: CGPoint, radius: CGFloat) {
-        let o = center - radius
-        self.init(origin: o, size: CGSize(radius: radius))
     }
 }

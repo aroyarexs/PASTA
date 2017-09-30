@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Metron
 
 /// similarity operator
 infix operator ~
@@ -33,7 +34,7 @@ public class PASTAMarker: UIView {
     public var radius: CGFloat {
         didSet {
             if useMeanValues { self.radius = meanRadius.add(value: radius) }
-            self.frame = CGRect(center: center, radius: radius)
+            self.frame = CGRect(center: center, edges: radius * 2)
             markerSnapshot.radius = radius
         }
     }
@@ -77,7 +78,7 @@ public class PASTAMarker: UIView {
         self.radius = radius
         self.previousCenter = center
         markerSnapshot = MarkerSnapshot(center: center, radius: radius)
-        super.init(frame: CGRect(center: center, radius: radius))
+        super.init(frame: CGRect(center: center, edges: radius * 2))
 //        backgroundColor = UIColor.gray  // uncomment to have a visualization of all detected markers
     }
 
@@ -93,7 +94,7 @@ public class PASTAMarker: UIView {
     func update(touch: UITouch) {
         previousCenter = center
         self.radius = touch.majorRadius
-        self.frame = CGRect(center: touch.preciseLocation(in: superview), radius: radius)
+        self.frame = CGRect(center: touch.preciseLocation(in: superview), edges: radius * 2)
     }
 
     // MARK: - UIResponder Overrides
