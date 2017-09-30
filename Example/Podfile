@@ -1,12 +1,5 @@
 use_frameworks!
 
 target 'PASTA_Example' do
-  pod 'PASTA', :path => '../'
-
-  target 'PASTA_Tests' do
-    inherit! :search_paths
-
-    pod 'Quick', '~> 1.0.0'
-  pod 'Nimble', '~> 5.1.1'
-  end
+  pod 'PASTA', :path => '../', :testspecs => ['Tests']
 end
