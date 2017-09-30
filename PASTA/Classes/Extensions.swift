@@ -40,7 +40,7 @@ extension CGVector {
         - absolute: If `true` the return value will always be a non-negative value.
      - returns: The angle in radians between -π and π (0 to π, if `absolute` is `true`).
      */
-    func angleRadians(between vector: CGVector, absolute: Bool = false) -> CGFloat {   // TODO: put radians in name
+    func angle(between vector: CGVector, absolute: Bool = false) -> Angle {
         var radian = CoreGraphics.atan2(vector.dy, vector.dx) - CoreGraphics.atan2(dy, dx)
 
         if radian > CGFloat.pi {
@@ -48,7 +48,7 @@ extension CGVector {
         } else if radian < -CGFloat.pi {
             radian += CGFloat.pi * 2
         }
-        return absolute ? abs(radian) : radian
+        return absolute ? Angle(abs(radian)) : Angle(radian)
     }
 
     /**
@@ -172,13 +172,5 @@ extension CGPoint {
         let v1 = CGVector(from: self, to: point1)
         let v2 = CGVector(from: self, to: point2)
         return v1.magnitude <= v2.magnitude ? point1 : point2
-    }
-}
-
-extension CGFloat {
-
-    /// Converts value to degree.
-    var radianToDegree: CGFloat {
-        return self * 180.0 / CGFloat.pi
     }
 }

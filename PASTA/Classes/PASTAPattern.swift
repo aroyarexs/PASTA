@@ -50,7 +50,7 @@ public class PASTAPattern {
 
         let v1 = CGVector(from: markers[1].center, to: markers[0].center)
         let v2 = CGVector(from: markers[1].center, to: markers[2].center)
-        if v1.angleRadians(between: v2) < 0 { snapshots.reverse() }   // ensures correct angle calculation
+        if v1.angle(between: v2) < Angle(0) { snapshots.reverse() }   // ensures correct angle calculation
     }
 
     /**
@@ -77,19 +77,21 @@ public class PASTAPattern {
         - uuidString: The marker which will be used as point of origin.
      - returns: `CGFloat.infinity` if marker couldn't be found, otherwise the angle in radians between 0 - π.
      */
-    func angle(atMarkerWith uuidString: String) -> CGFloat {
+    func angle(atMarkerWith uuidString: String) -> Angle {
         let optionalMarker = snapshots.first { $0.uuidString == uuidString }
         let optionalNeighbour1 = snapshots.first { $0.uuidString != uuidString }
-        guard let baseMarker = optionalMarker, let neighbour1 = optionalNeighbour1 else { return CGFloat.infinity }
+        guard let baseMarker = optionalMarker, let neighbour1 = optionalNeighbour1 else {
+            return Angle(CGFloat.infinity)
+        }
         let optionalNeighbour2 = snapshots.first {
             $0.uuidString != baseMarker.uuidString && $0.uuidString != neighbour1.uuidString
         }
-        guard let neighbour2 = optionalNeighbour2 else { return CGFloat.infinity }
+        guard let neighbour2 = optionalNeighbour2 else { return Angle(CGFloat.infinity) }
 
         let v1 = CGVector(from: baseMarker.center, to: neighbour1.center)
         let v2 = CGVector(from: baseMarker.center, to: neighbour2.center)
 
-        return v1.angleRadians(between: v2, absolute: true)
+        return v1.angle(between: v2, absolute: true)
     }
 
     /**
@@ -112,8 +114,8 @@ public class PASTAPattern {
         for _ in ownReferences.makeIterator() {
             for (ownRef, comparatorRef) in zip(ownReferences, comparator.snapshots) {
                 // checking internal angle
-                let comparatorAngle = comparator.angle(atMarkerWith: comparatorRef.uuidString).radianToDegree
-                isSimilar = isSimilar && isAngleSimilar(atMarkerWith: ownRef.uuidString, toDegrees: comparatorAngle)
+                let comparatorAngle = comparator.angle(atMarkerWith: comparatorRef.uuidString)
+                isSimilar = isSimilar && isAngleSimilar(atMarkerWith: ownRef.uuidString, to: comparatorAngle)
                 // checking marker radius
                 // FIXME: disabled for better detection, marker size is way to unreliable
 //                isRadiusSimilar = isRadiusSimilar && ownRef.isRadiusSimilar(to: comparatorRef)
@@ -147,8 +149,8 @@ public class PASTAPattern {
         - angleInDegree: The angle to compare with in degree.
      - returns: `true` if angle similar, otherwise `false`.
      */
-    public func isAngleSimilar(atMarkerWith uuidString: String, toDegrees: CGFloat) -> Bool {
-        return abs(angle(atMarkerWith: uuidString).radianToDegree - toDegrees) < 9    // TODO: right value
+    public func isAngleSimilar(atMarkerWith uuidString: String, to: Angle) -> Bool {
+        return abs(angle(atMarkerWith: uuidString).degrees - to.degrees) < 9    // TODO: right value
     }
 }
 

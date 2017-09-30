@@ -29,8 +29,8 @@ public class PASTATangible: PASTAMarker {
     /// The orientation as a vector since this Tangible was detected.
     public var initialOrientationVector: CGVector {
         let centerToMarkerVector = CGVector(from: center, to: markers[0].center)
-        let angle = initialCenterToMarker0Vector.angleRadians(between: centerToMarkerVector).radianToDegree
-        return CGVector.normalizedUp.rotate(degrees: angle)
+        let angle = initialCenterToMarker0Vector.angle(between: centerToMarkerVector)
+        return CGVector.normalizedUp.rotate(degrees: angle.degrees)
     }
     /// The orientation of this Tangible based on the pattern as a normalized vector.
     /// `nil` if pattern has no uniquely identifiable marker.
@@ -130,9 +130,9 @@ public class PASTATangible: PASTAMarker {
 
             let firstToNew = CGVector(from: firstMarker.center, to: newMarker.center)
             let lastToNew = CGVector(from: lastMarker.center, to: newMarker.center)
-            let angleAtNew = firstToNew.angleRadians(between: lastToNew, absolute: true).radianToDegree
+            let angleAtNew = firstToNew.angle(between: lastToNew, absolute: true)
 
-            if pattern.isAngleSimilar(atMarkerWith: inactiveMarker.markerSnapshot.uuidString, toDegrees: angleAtNew) {
+            if pattern.isAngleSimilar(atMarkerWith: inactiveMarker.markerSnapshot.uuidString, to: angleAtNew) {
                 replaceableMarker = inactiveMarker
             }
         }
@@ -154,12 +154,12 @@ public class PASTATangible: PASTAMarker {
     /// - returns: A marker or `nil`.
     func markerWithAngleSimilarToNone() -> PASTAMarker? {
         for marker in internalMarkers {
-            let angle = pattern.angle(atMarkerWith: marker.markerSnapshot.uuidString).radianToDegree
+            let angle = pattern.angle(atMarkerWith: marker.markerSnapshot.uuidString)
             var notSimilar = true
             markers.forEach { comparator in
                 guard marker != comparator else { return }
                 let comparatorId = comparator.markerSnapshot.uuidString
-                notSimilar = notSimilar && pattern.isAngleSimilar(atMarkerWith: comparatorId, toDegrees: angle) == false
+                notSimilar = notSimilar && pattern.isAngleSimilar(atMarkerWith: comparatorId, to: angle) == false
             }
             if notSimilar { return marker }
         }
@@ -225,10 +225,10 @@ extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
             let unguardedOriginalActiveVector = pattern.vector(from: theOtherActiveMarker, to: marker)
             guard let originalActiveVector = unguardedOriginalActiveVector else { return }
             let currentActiveVector = CGVector(from: theOtherActiveMarker.center, to: marker.center)
-            let angle = originalActiveVector.angleRadians(between: currentActiveVector).radianToDegree
+            let angle = originalActiveVector.angle(between: currentActiveVector)
 
             guard let originalInactiveVector = pattern.vector(from: marker, to: inactiveMarker) else { return }
-            let originalInactiveVectorRotated = originalInactiveVector.rotate(degrees: angle)
+            let originalInactiveVectorRotated = originalInactiveVector.rotate(degrees: angle.degrees)
 
             let markerVector = CGVector(from: .zero, to: marker.center)
             let tempInactiveCenter = (markerVector + originalInactiveVectorRotated).point
