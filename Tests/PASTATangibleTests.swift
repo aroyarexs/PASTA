@@ -242,7 +242,8 @@ class PASTATangibleTests: QuickSpec {
                 }
                 it("frame updates") {
                     guard let tangible = t else { return }
-                    expect(tangible.frame.origin).to(equal(tangible.center - tangible.radius))
+                    expect(tangible.frame.origin).to(equal(tangible.center.applying(
+                            .init(translationX: -tangible.radius, y: -tangible.radius))))
                     expect(tangible.frame.width).to(equal(tangible.radius*2))
                 }
                 it("radius did not changed") {

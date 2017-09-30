@@ -97,28 +97,6 @@ extension CGPoint {
     }
 
     /**
-     Adds `rhs` to x and y coordinate of `lhs`.
-     - parameters:
-        - first: A point.
-        - second: A float.
-     - returns: A new point representing the transition.
-     */
-    static func + (_ lhs: CGPoint, _ rhs: CGFloat) -> CGPoint {
-        return CGPoint(x: lhs.x + rhs, y: lhs.y + rhs)
-    }
-
-    /**
-     Subtracts `rhs` of `lhs`.
-     - parameters:
-        - first: A point.
-        - second: A float.
-     - returns: A new point representing the transition.
-     */
-    static func - (_ lhs: CGPoint, _ rhs: CGFloat) -> CGPoint {
-        return lhs + (-rhs)
-    }
-
-    /**
      Returns the point closest to the receiver.
      If `point1` is closer or as close as `point2` `point1` will be returned, otherwise `point2`.
      - parameters:
