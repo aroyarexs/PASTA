@@ -6,15 +6,13 @@
 //  Copyright © 2017 Aaron Krämer. All rights reserved.
 //
 
-import UIKit
-
 /// Used to notify the receiver of any status changes of
 public protocol MarkerStatus: AnyObject {
 
     /**
      Notifies the receiver that a (new) marker did become active.
      - parameters:
-        - marker: The marker who becomes active.
+        - marker: The marker which becomes active.
      */
     func markerDidBecomeActive(_ marker: PASTAMarker)
     /**
@@ -32,11 +30,11 @@ public protocol MarkerEvent: MarkerStatus {
      Notifies the receiver that a marker moved.
      - parameters:
         - marker: The marker which moved.
-        - previousLocation: The previous location of the marker.
      */
     func markerMoved(_ marker: PASTAMarker)
 }
 
+/// TODO: documentation
 public protocol TangibleStatus: AnyObject {
 
     /**
@@ -44,22 +42,22 @@ public protocol TangibleStatus: AnyObject {
      For example if all markers were inactive but one turned active or if a new Tangible was composed.
      If a similar Tangible was already on the screen the `tag` property of `tangible` will be set to the same value.
      - parameters:
-        - marker: The tangible who becomes active.
+        - tangible: The tangible which becomes active.
      */
     func tangibleDidBecomeActive(_ tangible: PASTATangible)
     /**
      Notifies the receiver that a tangible did become inactive.
      For example all marker did become inactive.
      - parameters:
-        - marker: The tangible which did become inactive.
+        - tangible: The tangible which did become inactive.
      */
     func tangibleDidBecomeInactive(_ tangible: PASTATangible)
     /**
      Notifies the receiver that `marker` of `tangible` becomes inactive.
      `tangible` is becoming incomplete but is still active.
      - parameters:
+        - tangible: The Tangible which has lost a marker
         - marker: The marker which did become inactive.
-        - tangible: The Tangible which has the inactive marker
      */
     func tangible(_ tangible: PASTATangible, lost marker: PASTAMarker)
     /**
@@ -71,6 +69,7 @@ public protocol TangibleStatus: AnyObject {
     func tangible(_ tangible: PASTATangible, recovered marker: PASTAMarker)
 }
 
+/// TODO: documentation
 public protocol TangibleEvent: TangibleStatus {
 
     /**

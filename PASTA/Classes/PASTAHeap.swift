@@ -6,20 +6,19 @@
 //  Copyright © 2017 Aaron Krämer. All rights reserved.
 //
 
-/// This class creates arrays of markers used to initialize a Tangible.
-class PASTAHeap: Sequence, IteratorProtocol {
+/// This class creates an array of marker combinations used to initialize a Tangible.
+class PASTAHeap: Sequence, IteratorProtocol {   // TODO: Rename to PASTACombination
     /// An array containing arrays of markers.
-    let configurations: [[PASTAMarker]]
+    let configurations: [[PASTAMarker]] // TODO: rename combinations
     /// Used in the `IteratorProtocol`.
     private var current = 0
 
     /**
-     Creates new configurations.
-     Every configuration contains `marker`.
-     Every configuration has `markerPerPattern` markers.
-     If `markerPerPattern` is smaller 2 no configurations will be created.
+     Creates new combinations.
+     Every combination contains `marker` and has the amount of `markerPerPattern`.
+     If `markerPerPattern` is smaller 2 no combinations will be created.
      - parameters:
-        - marker: The marker which should be included in every configuration.
+        - marker: The marker which should be included in every combination.
         - unassigned: An array of unassigned markers. Should not include `marker`.
         - markerPerPattern: The amount of markers in every configuration.
             Default is `3`.

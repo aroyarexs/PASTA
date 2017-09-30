@@ -19,7 +19,7 @@ import Metron
 
  If you need a Tangible which supports less or more than 3 markers you have to create a subclass.
  */
-public class PASTATangible: PASTAMarker {
+public class PASTATangible: PASTAMarker {   // TODO: Rename to PassiveTangible
 
     public override var useMeanValues: Bool {
         didSet { markers.forEach { $0.useMeanValues = useMeanValues } }

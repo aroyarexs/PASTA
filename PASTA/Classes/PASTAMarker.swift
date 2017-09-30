@@ -82,6 +82,9 @@ public class PASTAMarker: UIView {
 //        backgroundColor = UIColor.gray  // uncomment to have a visualization of all detected markers
     }
 
+    /// A `PASTAMarker` initialized with `center` (0,0) and `radius` 0.
+    /// - parameter coder: A `NSCoder`.
+    /// - returns: A `PASTAMarker` initialized with `center` (0,0) and `radius` 0.
     public required convenience init?(coder aDecoder: NSCoder) {
         self.init(center: CGPoint.zero)
     }
