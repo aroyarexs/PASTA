@@ -43,7 +43,7 @@ public class PASTAPattern {
         let markers = [snap1, snap2, snap3]
         markers.forEach {
             // translating tangible to (0,0) for easier comparison with other
-            let markerRef = MarkerSnapshot(center: $0.center - circumcenter, radius: $0.radius,
+            let markerRef = MarkerSnapshot(center: $0.center - circumcenter.vector, radius: $0.radius,
                     uuid: $0.uuid)
             snapshots.append(markerRef)
         }
