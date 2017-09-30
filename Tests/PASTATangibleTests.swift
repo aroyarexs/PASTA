@@ -131,6 +131,78 @@ class PASTATangibleTests: QuickSpec {
                     expect(tangible.markers.contains(marker)) == false
                     expect(tangible.inactiveMarkers.count) == 2
                 }
+
+                context("all marker active") {
+                    var activePattern: PASTAPattern!
+                    beforeEach {
+                        m1.isActive = true
+                        m3.isActive = true
+                        activePattern = t!.pattern
+                    }
+                    it("has no inactive marker") {
+                        guard let tangible = t else { return }
+                        expect(tangible.inactiveMarkers.isEmpty) == true
+                    }
+                    context("m3 is inactive") {
+                        var inactivePattern: PASTAPattern!
+                        beforeEach {
+                            var touches = Set<MockTouch>()
+                            touches.insert(MockTouch(location: m3.center, radius: m3.radius))
+                            m3.touchesEnded(touches, with: nil)
+                            inactivePattern = t!.pattern
+                        }
+                        it("has an inactive marker") {
+                            guard let tangible = t else { return }
+                            expect(tangible.inactiveMarkers.count) == 1
+                        }
+                        it("current and previous pattern are similar") {
+                            guard let tangible = t else { return }
+                            expect(activePattern.isSimilar(to: tangible.pattern)) == true
+                        }
+                        it("m3 marker did not moved") {
+                            expect(m3.center) == m3.previousCenter
+                        }
+                        context("m3 active again") {
+                            var secondActivePattern: PASTAPattern!
+                            beforeEach {
+                                var touches = Set<MockTouch>()
+                                touches.insert(MockTouch(location: m3.center, radius: m3.radius))
+                                m3.touchesBegan(touches, with: nil)
+                                secondActivePattern = t!.pattern
+                            }
+                            it("has no inactive markers") {
+                                guard let tangible = t else { return }
+                                expect(tangible.inactiveMarkers.isEmpty) == true
+                            }
+                            it("pattern similar to previous") {
+                                guard let tangible = t else { return }
+                                expect(tangible.pattern.isSimilar(to: inactivePattern)) == true
+                            }
+                            it("m3 marker did not moved") {
+                                expect(m3.center) == m3.previousCenter
+                            }
+                            context("m3 inactive again") {
+                                beforeEach {
+                                    var touches = Set<MockTouch>()
+                                    touches.insert(MockTouch(location: m3.center, radius: m3.radius))
+                                    m3.touchesEnded(touches, with: nil)
+                                }
+                                it("has an inactive marker") {
+                                    guard let tangible = t else { return }
+                                    expect(tangible.inactiveMarkers.count) == 1
+                                }
+                                it("m3 marker did not moved") {
+                                    expect(m3.center) == m3.previousCenter
+                                }
+                                it("pattern similar to previous") {
+                                    guard let tangible = t else { return }
+                                    expect(tangible.pattern.isSimilar(to: secondActivePattern)) == true
+                                }
+
+                            }
+                        }
+                    }
+                }
             }
 
             context("received a marker-moved event") {
