@@ -163,6 +163,19 @@ extension PASTAPattern: Equatable {
     }
 }
 
+extension PASTAPattern: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        let triangle = Triangle(a: snapshots[0].center, b: snapshots[1].center, c: snapshots[2].center)
+        return "PASTAPattern {\n" +
+                "center: \(triangle.cicrumcenter), " +
+                "radius: \(triangle.cicrumcenter.distance(to: snapshots[0].center)),\n" +
+                "snap1: \(snapshots[0]),\n" +
+                "snap2: \(snapshots[1]),\n" +
+                "snap3: \(snapshots[2])\n" +
+                "}"
+    }
+}
+
 /**
  Contains a snapshot of a `PASTAMarker` at the time this structure was initialized.
  */
@@ -203,5 +216,12 @@ extension MarkerSnapshot: Hashable {
 
     public static func == (lhs: MarkerSnapshot, rhs: MarkerSnapshot) -> Bool {
         return lhs.center == rhs.center && lhs.radius == rhs.radius
+    }
+}
+
+extension MarkerSnapshot: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return "MarkerSnapshot {center \(center), radius: \(radius), " +
+                "uuidString: \(uuidString.components(separatedBy: "-").first ?? "")...}"
     }
 }
