@@ -66,27 +66,6 @@ extension CGVector {
 extension CGPoint {
 
     /**
-     Calculates the center of a circle which has all given points on his circle line.
-     ## Reference:
-     [Circumcenter](https://en.wikipedia.org/wiki/Circumscribed_circle#Cartesian_coordinates_2)
-     - parameters:
-        - first: A point.
-        - second: A point.
-        - third: A point.
-     - returns: A point forming the circumcenter.
-     */
-    static func circumcenter(first: CGPoint, second: CGPoint, third: CGPoint) -> CGPoint {
-        let d = 2 * (first.x * (second.y - third.y) + second.x * (third.y - first.y) + third.x * (first.y - second.y))
-        let a = pow(first.x, 2) + pow(first.y, 2)
-        let b = pow(second.x, 2) + pow(second.y, 2)
-        let c = pow(third.x, 2) + pow(third.y, 2)
-        let x = (a * (second.y - third.y) + b * (third.y - first.y) + c * (first.y - second.y)) / d
-        let y = (a * (third.x - second.x) + b * (first.x - third.x) + c * (second.x - first.x)) / d
-
-        return CGPoint(x: x, y: y)
-    }
-
-    /**
      Obtain center of a circle if you know two points on the circle and its radius.
      (There should be two solutions).
      If `radius` is smaller than half the distance between `point1` and `point2`,

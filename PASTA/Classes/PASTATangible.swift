@@ -72,14 +72,11 @@ public class PASTATangible: PASTAMarker {
         internalMarkers = markers
         pattern = PASTAPattern(marker1: markers[0], marker2: markers[1], marker3: markers[2])
 
-        let circumcenter = CGPoint.circumcenter(
-                first: markers[0].center,
-                second: markers[1].center,
-                third: markers[2].center)
-        let radius = CGVector(from: circumcenter, to: markers[0].center).magnitude
-        initialCenterToMarker0Vector = CGVector(from: circumcenter, to: markers[0].center)
+        let triangle = Triangle(a: markers[0].center, b: markers[1].center, c: markers[2].center)
+        let radius = CGVector(from: triangle.cicrumcenter, to: markers[0].center).magnitude
+        initialCenterToMarker0Vector = CGVector(from: triangle.cicrumcenter, to: markers[0].center)
         // TODO: decide if tangible can be formed (min, max radius?)
-        super.init(center: circumcenter, radius: radius)
+        super.init(center: triangle.cicrumcenter, radius: radius)
 
         markers.first?.superview?.addSubview(self)
 
@@ -214,7 +211,7 @@ extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
         if inactiveMarkers.count == 2 {
             let translate = marker.center - marker.previousCenter
             inactiveMarkers.forEach { $0.center = $0.center + translate }
-            center = CGPoint.circumcenter(first: markers[0].center, second: markers[1].center, third: markers[2].center)
+            center = Triangle(a: markers[0].center, b: markers[1].center, c: markers[2].center).cicrumcenter
         } else if inactiveMarkers.count == 1, let inactiveMarker = inactiveMarkers.first,
                   let theOtherActiveMarker = (markers.first { $0 != inactiveMarker && $0 != marker }) {
 
@@ -242,7 +239,7 @@ extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
             // Answer = Center + V / |V| * Radius
             inactiveMarker.center = center + (centerToTempInactive.normalized * radius).point
         } else {
-            center = CGPoint.circumcenter(first: markers[0].center, second: markers[1].center, third: markers[2].center)
+            center = Triangle(a: markers[0].center, b: markers[1].center, c: markers[2].center).cicrumcenter
         }
         radius = CGVector(from: center, to: marker.center).magnitude
 

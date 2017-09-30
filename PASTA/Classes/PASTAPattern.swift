@@ -38,7 +38,7 @@ public class PASTAPattern {
     ///    - marker3: A `MarkerSnapshot`.
     /// - returns: A new Tangible pattern.
     init(snap1: MarkerSnapshot, snap2: MarkerSnapshot, snap3: MarkerSnapshot) {
-        let circumcenter = CGPoint.circumcenter(first: snap1.center, second: snap2.center, third: snap3.center)
+        let circumcenter = Triangle(a: snap1.center, b: snap2.center, c: snap3.center).cicrumcenter
 
         let markers = [snap1, snap2, snap3]
         markers.forEach {
