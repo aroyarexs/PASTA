@@ -234,13 +234,13 @@ extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
             let originalInactiveVectorRotated = originalInactiveVector.rotate(degrees: angle)
 
             let markerVector = CGVector(from: .zero, to: marker.center)
-            let tempInactiveCenter = (markerVector + originalInactiveVectorRotated).asPoint
+            let tempInactiveCenter = (markerVector + originalInactiveVectorRotated).point
             // find point on circle closest to `tempInactiveCenter`
             // https://stackoverflow.com/questions/300871/best-way-to-find-a-point-on-a-circle-closest-to-a-given-point
             // V = (Point - Center)
             let centerToTempInactive = CGVector(from: center, to: tempInactiveCenter)
             // Answer = Center + V / |V| * Radius
-            inactiveMarker.center = center + (centerToTempInactive.normalized * radius).asPoint
+            inactiveMarker.center = center + (centerToTempInactive.normalized * radius).point
         } else {
             center = CGPoint.circumcenter(first: markers[0].center, second: markers[1].center, third: markers[2].center)
         }

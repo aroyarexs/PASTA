@@ -26,10 +26,6 @@ extension CGVector {
     var distance: CGFloat {
         return hypot(dx, dy)
     }
-    /// The vector as `CGPoint`.
-    var asPoint: CGPoint {
-        return CGPoint(x: dx, y: dy)
-    }
     /// The receiver as normalized vector. `dx` and `dy` divided by `distance`.
     var normalized: CGVector {
         let length = self.distance
