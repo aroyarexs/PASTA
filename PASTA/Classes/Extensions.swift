@@ -8,11 +8,6 @@ import Metron
 
 extension CGVector {
 
-    /// Since coordinate system zero point is on the top left this vector is pointing from (0,0) to (0,-1).
-    static var normalizedUp: CGVector {
-        return CGVector(from: .zero, to: CGPoint(x: 0, y: -1))
-    }
-
     /**
      Creates a new vector facing from point `from` to point `to`.
      - parameters:

@@ -27,10 +27,11 @@ public class PASTATangible: PASTAMarker {   // TODO: Rename to PassiveTangible
     /// Vector from center to marker 0. Used as initial orientation
     let initialCenterToMarker0Vector: CGVector
     /// The orientation as a vector since this Tangible was detected.
+    /// Vector magnitude is 1 such that you can multiply it e.g. with `radius`.
     public var initialOrientationVector: CGVector {
         let centerToMarkerVector = CGVector(from: center, to: markers[0].center)
         let angle = initialCenterToMarker0Vector.angle(between: centerToMarkerVector)
-        return CGVector.normalizedUp.applying(.init(rotationAngle: angle))
+        return CGVector(angle: angle + Angle(.pi/2 * -1), magnitude: 1)
     }
     /// The orientation of this Tangible based on the pattern as a normalized vector.
     /// `nil` if pattern has no uniquely identifiable marker.
