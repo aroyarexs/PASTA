@@ -88,10 +88,7 @@ public class PASTAPattern {
         }
         guard let neighbour2 = optionalNeighbour2 else { return Angle(CGFloat.infinity) }
 
-        let v1 = CGVector(from: baseMarker.center, to: neighbour1.center)
-        let v2 = CGVector(from: baseMarker.center, to: neighbour2.center)
-
-        return v1.angle(between: v2).normalized
+        return Triangle(a: baseMarker.center, b: neighbour1.center, c: neighbour2.center).angleA
     }
 
     /**
