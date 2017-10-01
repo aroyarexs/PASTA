@@ -8,10 +8,13 @@
 
 import UIKit
 import PASTA
+import Metron
 
 class ViewController: UIViewController {
 
     var tangibles = Set<PASTATangible>()
+    var orientationLabels = [PASTATangible: (UILabel, UILabel)]()
+    let labelOffset: CGFloat = 40
 
     @IBOutlet weak var tangibleView: PASTAView!
 
@@ -43,6 +46,13 @@ extension ViewController: TangibleEvent {   // MARK: - TangibleEvent
 
     func tangibleMoved(_ tangible: PASTATangible) {
         tangible.layer.cornerRadius = tangible.radius
+
+        if let (initial, fixed) = orientationLabels[tangible] {
+            initial.center = tangible.center + tangible.initialOrientationVector * (tangible.radius + labelOffset)
+            if let orientationVector = tangible.orientationVector {
+                fixed.center = tangible.center + orientationVector * (tangible.radius + labelOffset)
+            }
+        }
     }
 
     func tangibleDidBecomeActive(_ tangible: PASTATangible) {
@@ -56,6 +66,25 @@ extension ViewController: TangibleEvent {   // MARK: - TangibleEvent
         tangible.layer.cornerRadius = tangible.radius
         tangible.layer.borderWidth = 2.0
 
+        let initialOrientationCenter = tangible.center + tangible.initialOrientationVector *
+                (tangible.radius + labelOffset)
+        let initialOrientationLabel = UILabel()
+        initialOrientationLabel.text = "IO"
+        initialOrientationLabel.frame = CGRect(center: initialOrientationCenter, edges: 20)
+        tangibleView.addSubview(initialOrientationLabel)
+
+        let orientationLabel = UILabel()
+        orientationLabel.text = "O"
+
+        if let orientationVector = tangible.orientationVector {
+            let orientationCenter = tangible.center + orientationVector * (tangible.radius + labelOffset)
+
+            orientationLabel.frame = CGRect(center: orientationCenter, edges: 20)
+
+            tangibleView.addSubview(orientationLabel)
+        }
+        orientationLabels[tangible] = (initialOrientationLabel, orientationLabel)
+
         print("✅", tangible.patternIdentifier ?? "no identifier")
         print("✅", tangible)
 
@@ -67,6 +96,11 @@ extension ViewController: TangibleEvent {   // MARK: - TangibleEvent
         print("❌", tangible)
 
         tangibles.remove(tangible)
+        if let (initial, fixed) = orientationLabels[tangible] {
+            initial.removeFromSuperview()
+            fixed.removeFromSuperview()
+            orientationLabels[tangible] = nil
+        }
     }
 
     func tangible(_ tangible: PASTATangible, lost marker: PASTAMarker) {
