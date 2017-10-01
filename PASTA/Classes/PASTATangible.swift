@@ -131,7 +131,8 @@ public class PASTATangible: PASTAMarker {   // TODO: Rename to PassiveTangible
 
             let firstToNew = CGVector(from: firstMarker.center, to: newMarker.center)
             let lastToNew = CGVector(from: lastMarker.center, to: newMarker.center)
-            let angleAtNew = firstToNew.angle(between: lastToNew).normalized
+            var angleAtNew = firstToNew.angle(between: lastToNew)
+            angleAtNew = angleAtNew.degrees < 0 ? angleAtNew.inversed : angleAtNew
 
             if pattern.isAngleSimilar(atMarkerWith: inactiveMarker.markerSnapshot.uuidString, to: angleAtNew) {
                 replaceableMarker = inactiveMarker
