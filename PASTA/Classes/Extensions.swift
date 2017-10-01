@@ -18,10 +18,9 @@ extension CGVector {
         self.init(dx: to.x - from.x, dy: to.y - from.y)
     }
 
-    /// The receiver as normalized vector. `dx` and `dy` divided by `distance`.
+    /// The receiver as normalized vector. `dx` and `dy` divided by `magnitude`.
     var normalized: CGVector {
-        let length = magnitude
-        return CGVector(dx: dx/length, dy: dy/length)
+        return CGVector(dx: dx, dy: dy)/magnitude
     }
     /**
      Calculates the angle between the receiver and `vector` with point (0,0) as origin.
