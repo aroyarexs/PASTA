@@ -21,8 +21,10 @@ public class PASTAMarker: UIView {
     /// Automatically sets `previousCenter` before setting new `center` value.
     public override var center: CGPoint {
         willSet {
-            previousCenter = center
-            markerSnapshot.center = center
+            if newValue != center {
+                previousCenter = center
+                markerSnapshot.center = center
+            }
         }
     }
     /// Defines whether mean values for e.g. radius should be calculated and used.
@@ -95,9 +97,8 @@ public class PASTAMarker: UIView {
         - touch: A `UITouch` object.
      */
     func update(touch: UITouch) {
-        previousCenter = center
-        self.radius = touch.majorRadius
-        self.frame = CGRect(center: touch.preciseLocation(in: superview), edges: radius * 2)
+        radius = touch.majorRadius
+        center = touch.preciseLocation(in: superview)
     }
 
     // MARK: - UIResponder Overrides
