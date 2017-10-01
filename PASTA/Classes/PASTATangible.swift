@@ -213,7 +213,7 @@ extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
         if inactiveMarkers.count == 2 {
             let translate = marker.center - marker.previousCenter
             inactiveMarkers.forEach { $0.center = $0.center + translate }
-            center = Triangle(a: markers[0].center, b: markers[1].center, c: markers[2].center).cicrumcenter
+            center = center + translate
         } else if inactiveMarkers.count == 1, let inactiveMarker = inactiveMarkers.first,
                   let theOtherActiveMarker = (markers.first { $0 != inactiveMarker && $0 != marker }) {
 
