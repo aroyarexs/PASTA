@@ -139,3 +139,10 @@ public class PASTAMarker: UIView {
         tangible?.markerMoved(self)
     }
 }
+
+extension PASTAMarker {   // MARK: - CustomDebugStringConvertible
+    public override var debugDescription: String {
+        return "PASTAMarker {center: \(center); radius: \(radius); active: \(isActive); " +
+                "id: \(markerSnapshot.uuidString.components(separatedBy: "-").first ?? "")...}"
+    }
+}
