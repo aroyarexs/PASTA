@@ -24,26 +24,14 @@ extension CGVector {
         return CGVector(dx: dx/length, dy: dy/length)
     }
     /**
-     Calculates the angle in radians between this and `vector`.
-     Return value ranges from -π to π.
-     A positive value indicates the receiver is ahead of `vector` in a clockwise direction.
+     Calculates the angle between the receiver and `vector` with point (0,0) as origin.
+     A positive value indicates that receiver is ahead of `vector` in a clockwise direction.
      Negative value analog.
-     ## Reference:
-     [http://www.euclideanspace.com](http://www.euclideanspace.com/maths/algebra/vectors/angleBetween/issues/index.htm)
-     - parameters:
-        - vector: Another vector.
-        - absolute: If `true` the return value will always be a non-negative value.
-     - returns: The angle in radians between -π and π (0 to π, if `absolute` is `true`).
+     - parameter vector: The second vector.
+     - returns: A Metron `Angle`.
      */
-    func angle(between vector: CGVector, absolute: Bool = false) -> Angle {
-        var radian = CoreGraphics.atan2(vector.dy, vector.dx) - CoreGraphics.atan2(dy, dx)
-
-        if radian > CGFloat.pi {
-            radian -= CGFloat.pi * 2
-        } else if radian < -CGFloat.pi {
-            radian += CGFloat.pi * 2
-        }
-        return absolute ? Angle(abs(radian)) : Angle(radian)
+    func angle(between vector: CGVector) -> Angle {
+        return CGPoint.zero.angle(previous: vector.point, next: self.point)
     }
 }
 

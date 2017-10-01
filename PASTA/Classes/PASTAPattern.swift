@@ -91,7 +91,7 @@ public class PASTAPattern {
         let v1 = CGVector(from: baseMarker.center, to: neighbour1.center)
         let v2 = CGVector(from: baseMarker.center, to: neighbour2.center)
 
-        return v1.angle(between: v2, absolute: true)
+        return v1.angle(between: v2).normalized
     }
 
     /**
