@@ -91,6 +91,13 @@ public class PASTAPattern {
         return Triangle(a: baseMarker.center, b: neighbour1.center, c: neighbour2.center).angleA
     }
 
+    /// Searches for the snapshot related to `marker`.
+    /// - parameter marker: A PASTAMarker.
+    /// - returns: The marker snapshot related to `marker` if their snapshot UUIDs are equal, otherwise `nil`.
+    func snapshot(for marker: PASTAMarker) -> MarkerSnapshot? {   // TODO: for marker: PASTAMarker
+        return snapshots.first { $0.uuidString == marker.markerSnapshot.uuidString }
+    }
+
     /**
      Compares the receiver with `comparator`.
      Checks for similar tangible radii, internal angles, and marker similarity.
