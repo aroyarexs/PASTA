@@ -224,22 +224,13 @@ extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
             center = center.closest(point1: possibleCenters.0, point2: possibleCenters.1)
 
             // calculating new position for inactive marker
-            let unguardedOriginalActiveVector = pattern.vector(from: theOtherActiveMarker, to: marker)
-            guard let originalActiveVector = unguardedOriginalActiveVector else { return }
+            guard let originalActiveVector = pattern.vector(from: theOtherActiveMarker, to: marker) else { return }
             let currentActiveVector = CGVector(from: theOtherActiveMarker.center, to: marker.center)
             let angle = originalActiveVector.angle(between: currentActiveVector)
 
-            guard let originalInactiveVector = pattern.vector(from: marker, to: inactiveMarker) else { return }
-            let originalInactiveVectorRotated = originalInactiveVector.applying(.init(rotationAngle: angle))
-
-            let markerVector = CGVector(from: .zero, to: marker.center)
-            let tempInactiveCenter = (markerVector + originalInactiveVectorRotated).point
-            // find point on circle closest to `tempInactiveCenter`
-            // https://stackoverflow.com/questions/300871/best-way-to-find-a-point-on-a-circle-closest-to-a-given-point
-            // V = (Point - Center)
-            let centerToTempInactive = CGVector(from: center, to: tempInactiveCenter)
-            // Answer = Center + V / |V| * Radius
-            inactiveMarker.center = center + (centerToTempInactive.normalized * radius)
+            guard let inactiveInPattern = pattern.snapshot(for: inactiveMarker) else { return }
+            let centerToInactive = LineSegment(a: .zero, b: inactiveInPattern.center).rotatedAroundA(angle).vector
+            inactiveMarker.center = center + centerToInactive
         } else {
             center = Triangle(a: markers[0].center, b: markers[1].center, c: markers[2].center).cicrumcenter
         }
