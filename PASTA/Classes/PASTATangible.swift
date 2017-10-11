@@ -108,34 +108,37 @@ public class PASTATangible: PASTAMarker {   // TODO: Rename to PassiveTangible
         var replaceableMarker: PASTAMarker?
 
         if activeMarkers.count == 1 {
+            let firstInactiveMarker = inactiveMarkers.first!
+            guard let firstInactiveInPattern = pattern.snapshot(for: firstInactiveMarker) else { return false }
+            let secondInactiveMarker = inactiveMarkers.last!
+            guard let secondInactiveInPattern = pattern.snapshot(for: secondInactiveMarker) else { return false }
             let activeMarker = activeMarkers.first!
-            let activeToNew = CGVector(from: activeMarker.center, to: newMarker.center)
-            var offsetToBeat = CGFloat.infinity
-            inactiveMarkers.forEach { inactiveMarker in // find inactive marker to replace or none
-                guard let activeToInactiveInPattern = pattern.vector(from: activeMarker, to: inactiveMarker),
-                      let inactiveInPattern = (pattern.snapshots.first {
-                          $0.uuidString == inactiveMarker.markerSnapshot.uuidString
-                      })
-                        else { return }
-                let offset = abs(activeToNew.magnitude - activeToInactiveInPattern.magnitude)
-                // new marker has to lay inside radius of inactive marker
-                if offset < offsetToBeat && offset <= inactiveInPattern.radius {  // checking offset
-                    replaceableMarker = inactiveMarker
-                    offsetToBeat = offset
-                }
+
+            let activeToNew = LineSegment(a: activeMarker.center, b: newMarker.center)
+            guard let activeToFirstInactive = pattern.vector(from: activeMarker, to: firstInactiveMarker)
+                    else { return false }
+            guard let activeToSecondInactive = pattern.vector(from: activeMarker, to: secondInactiveMarker)
+                    else { return false }
+
+            let isDistanceWithinFirstInactive = abs(activeToNew.length - activeToFirstInactive.magnitude) <
+                    firstInactiveInPattern.radius
+            let isDistanceWithinSecondInactive = abs(activeToNew.length - activeToSecondInactive.magnitude) <
+                    secondInactiveInPattern.radius
+
+            if isDistanceWithinFirstInactive && isDistanceWithinSecondInactive {
+                let firstSegment = LineSegment(a: newMarker.center, b: firstInactiveMarker.center)
+                let secondSegment = LineSegment(a: newMarker.center, b: secondInactiveMarker.center)
+                replaceableMarker = firstSegment.length < secondSegment.length ?
+                        firstInactiveMarker : secondInactiveMarker
+            } else {
+                replaceableMarker = isDistanceWithinFirstInactive ? firstInactiveMarker : secondInactiveMarker
             }
         } else if activeMarkers.count == 2 {
             let firstMarker = activeMarkers.first!
             let lastMarker = activeMarkers.last!
-            let inactiveMarker = inactiveMarkers.first!
-
-            let firstToNew = CGVector(from: firstMarker.center, to: newMarker.center)
-            let lastToNew = CGVector(from: lastMarker.center, to: newMarker.center)
-            var angleAtNew = firstToNew.angle(between: lastToNew)
-            angleAtNew = angleAtNew.degrees < 0 ? angleAtNew.inversed : angleAtNew
-
-            if pattern.isAngleSimilar(atMarkerWith: inactiveMarker.markerSnapshot.uuidString, to: angleAtNew) {
-                replaceableMarker = inactiveMarker
+            let newPattern = PASTAPattern(marker1: firstMarker, marker2: lastMarker, marker3: newMarker)
+            if pattern.isSimilar(to: newPattern), let inactive = inactiveMarkers.first {
+                replaceableMarker = inactive
             }
         }
         if let replaceableMarker = replaceableMarker, let index = internalMarkers.index(of: replaceableMarker) {
