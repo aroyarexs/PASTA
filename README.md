@@ -33,6 +33,10 @@ To use PASTA in your project:
 
 	4.2. disable whitelist by setting ``patternWhitelistDisabled`` to ``true``, place your desired Tangibles on the screen, whitelist the patterns, and enable whitelist again.
 
+## Tangibles
+
+A design and instructions on how to build a tangible are available at [Thingiverse](https://www.thingiverse.com/thing:1810704)
+
 ## Author
 
 Aaron Krämer
