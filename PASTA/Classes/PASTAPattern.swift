@@ -218,6 +218,11 @@ extension MarkerSnapshot: Hashable {
         return (center.x.hashValue ^ center.y.hashValue &* 16777619) + Int(radius)
     }
 
+    /// Compares `center` and `radius` of both snapshots.
+    /// - parameters:
+    ///     - lhs: Left hand side.
+    ///     - rhs: Right hand side.
+    /// - returns: `true` if `center` and `radius` equal, otherwise `false`.
     public static func == (lhs: MarkerSnapshot, rhs: MarkerSnapshot) -> Bool {
         return lhs.center == rhs.center && lhs.radius == rhs.radius
     }
