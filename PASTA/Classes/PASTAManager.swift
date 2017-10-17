@@ -39,6 +39,13 @@ class PASTAManager: TangibleManager {
         return patternWhitelistDisabled || patternWhitelist.contains { $0.value.isSimilar(to: pattern) }
     }
 
+    /// Concatenated `isSimilar(pattern:)` and `isPatternAllowed(pattern:)` with boolean AND.
+    /// - parameter pattern: A tangible pattern.
+    /// - returns: `true` if both functions return `true`, otherwise `false`.
+    func willAcceptPattern(pattern: PASTAPattern) -> Bool {
+        return isPatternAllowed(pattern: pattern) && isSimilar(pattern: pattern)
+    }
+
     /// Tries to composes a new Tangible.
     /// `self` is assigned to `tangibleManager` property and `tangibleDelegate` is assigned to `eventDelegate`.
     /// - parameter markers: An array of marker.
@@ -79,8 +86,7 @@ class PASTAManager: TangibleManager {
     func compose(markers: [PASTAMarker]) -> Bool {
         guard markers.count == 3 else { return false }
         let pattern = PASTAPattern(marker1: markers[0], marker2: markers[1], marker3: markers[2])
-        guard isPatternAllowed(pattern: pattern) && (isSimilar(pattern: pattern) == false || similarPatternsAllowed)
-                else { return insertBlockedTangible(markers: markers) }
+        guard willAcceptPattern(pattern: pattern) else { return insertBlockedTangible(markers: markers) }
 
         guard let tangible = createTangible(markers: markers) else { return false }
 
