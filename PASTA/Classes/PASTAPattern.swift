@@ -141,7 +141,7 @@ public class PASTAPattern {
      - returns: `true` if radii similar, otherwise `false`.
      */
     public func isRadiusSimilar(to radius: CGFloat) -> Bool {
-        return abs(CGVector(from: .zero, to: snapshots[0].center).magnitude - radius) < 6 // TODO: right value
+        return abs(CGVector(from: .zero, to: snapshots[0].center).magnitude - radius) < 6.7966
     }
 
     /**
