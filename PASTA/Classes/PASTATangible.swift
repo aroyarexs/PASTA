@@ -231,9 +231,11 @@ extension PASTATangible: MarkerEvent {  // MARK: - MarkerEvent
             let currentActiveVector = CGVector(from: theOtherActiveMarker.center, to: marker.center)
             let angle = originalActiveVector.angle(between: currentActiveVector)
 
-            guard let inactiveInPattern = pattern.snapshot(for: inactiveMarker) else { return }
-            let centerToInactive = LineSegment(a: .zero, b: inactiveInPattern.center).rotatedAroundA(angle).vector
-            inactiveMarker.center = center + centerToInactive
+            guard let inactiveInPattern = pattern.snapshot(for: inactiveMarker),
+                    let otherActiveInPattern = pattern.snapshot(for: theOtherActiveMarker) else { return }
+            let newPatternCenter = LineSegment(a: otherActiveInPattern.center, b: .zero).rotatedAroundA(angle).b
+            let newInactiveInPattern = LineSegment(a: otherActiveInPattern.center, b: inactiveInPattern.center).rotatedAroundA(angle).b // TODO: test new implementation
+            inactiveMarker.center = center + LineSegment(a: newPatternCenter, b: newInactiveInPattern).vector
         } else {
             center = Triangle(a: markers[0].center, b: markers[1].center, c: markers[2].center).cicrumcenter
         }
