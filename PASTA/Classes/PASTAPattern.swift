@@ -154,7 +154,7 @@ public class PASTAPattern {
      - returns: `true` if angle similar, otherwise `false`.
      */
     public func isAngleSimilar(atMarkerWith uuidString: String, to: Angle) -> Bool {
-        return abs(angle(atMarkerWith: uuidString).degrees - to.degrees) < 9    // TODO: right value
+        return abs(angle(atMarkerWith: uuidString).degrees - to.degrees) < 12.396
     }
 }
 
