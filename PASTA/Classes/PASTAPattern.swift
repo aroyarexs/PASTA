@@ -94,7 +94,7 @@ public class PASTAPattern {
     /// Searches for the snapshot related to `marker`.
     /// - parameter marker: A PASTAMarker.
     /// - returns: The marker snapshot related to `marker` if their snapshot UUIDs are equal, otherwise `nil`.
-    func snapshot(for marker: PASTAMarker) -> MarkerSnapshot? {   // TODO: for marker: PASTAMarker
+    func snapshot(for marker: PASTAMarker) -> MarkerSnapshot? {
         return snapshots.first { $0.uuidString == marker.markerSnapshot.uuidString }
     }
 

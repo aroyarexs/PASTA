@@ -197,7 +197,7 @@ public class PASTATangible: PASTAMarker {   // TODO: Rename to PassiveTangible
      - returns: A marker or `nil`.
      */
     public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        guard self.point(inside: point, with: event) else { return nil }
+        guard self.point(inside: point, with: event) else { return nil }    // TODO: debug
         let marker = inactiveMarkers.first { $0.hitTest(point, with: event) != nil }
         return marker ?? event == nil ? self : nil
         // TODO: may need to consider gestures https://developer.apple.com/documentation/uikit/uievent/1613832-touches
